@@ -1,8 +1,11 @@
 import { useState } from "react";
+import { useContext } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { AuthUsercontext } from "../context/Authcontext";
 
 function Signin(){
+    const { signIn } = useContext(AuthUsercontext);
 
     const navigate = useNavigate();
     const [formdata, setFormdata] = useState({
@@ -24,6 +27,7 @@ function Signin(){
             const response = await axios.post('http://localhost:3000/signIn',formdata);
             alert(response.data.message);
             localStorage.setItem('token',response.data.token);
+            signIn(response.data.token,response.data.user);
             navigate('/home')
         } catch (error) {
             console.error(error);
