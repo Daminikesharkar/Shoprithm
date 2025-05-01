@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 
 function Home() {
 
-  const { token,user } = useContext(AuthUsercontext);
+  const { token,user,signOut } = useContext(AuthUsercontext);
   const navigate = useNavigate();
 
   useEffect(()=>{
@@ -13,6 +13,11 @@ function Home() {
       navigate('/');
     }
   },[token,navigate])
+
+  const handleLogout =()=>{
+    signOut();
+    navigate('/');
+  }
 
   return (
       <div>
@@ -22,6 +27,7 @@ function Home() {
         ) : (
           <p>Loading user data...</p>
         )}
+        <button onClick={handleLogout}>Logout</button>
       </div>
     );
   }
