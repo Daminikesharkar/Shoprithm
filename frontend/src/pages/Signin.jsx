@@ -28,7 +28,7 @@ function Signin(){
             alert(response.data.message);
             localStorage.setItem('token',response.data.token);
             signIn(response.data.token,response.data.user);
-            navigate('/home')
+            navigate('/')
         } catch (error) {
             console.error(error);
         }

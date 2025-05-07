@@ -1,13 +1,17 @@
 import './App.css'
-import { Link } from 'react-router-dom';
+import { Navigate, Outlet } from "react-router-dom";
+import { AuthUsercontext } from "./context/Authcontext";
+import { useContext } from 'react';
 
 function App() {
-  return (
-    <>
-      <h1>Welcome to Shoprithm</h1>
-      <Link to="/signin">Login</Link> | <Link to="/signup">Signup</Link>
-    </>
-  )
+  const { token } = useContext(AuthUsercontext);
+  console.log(token)
+  return token ? (
+    <div>
+      <Outlet />
+    </div>
+  ) : (
+    <Navigate to="/auth" />
+  );
 }
-
-export default App
+export default App;
